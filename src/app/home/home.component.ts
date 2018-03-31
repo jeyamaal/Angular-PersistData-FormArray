@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
   
 
 
-// If form values are stored in  Session object Retirve those  
+// If form values are stored in  Session object Retirve those values 
  let formValues = sessionStorage.getItem('autosave');
     if (formValues) {
       this.applyFormValues(this.homeForm, JSON.parse(formValues));
