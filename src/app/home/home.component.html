@@ -1,0 +1,22 @@
+<p>
+  home works!
+</p>
+<!-- <form [formGroup]="homeForm" (ngSubmit)="onHomeFormSubmit()"> -->
+  <form [formGroup]="homeForm" (ngSubmit)="onHomeFormSubmit()">
+  <input type="text" class="form-control" placeholder="Home" formControlName="homeName">
+
+  <br>
+  <button type="submit" class="btn btn-success" [disabled]=homeForm.invalid (click)="btnNextHomeClick();">Save and Continue</button>
+
+  <div *ngIf= "!homeForm.invalid">
+      &#x2705;
+      <input type="hidden" [value]="mydata">
+  </div>
+
+  <!-- <ul class="nav flex-column">
+      <li class="nav-item"*ngIf= "!homeForm.invalid">
+        <a class="nav-link active" routerLink="/home" routerLinkActive="active">Home </a>
+      </li>
+  </ul>    -->
+</form>
+

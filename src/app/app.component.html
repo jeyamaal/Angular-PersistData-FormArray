@@ -1,0 +1,78 @@
+
+<br><br>
+<div class="col-sm-3 col-lg-2" id="navBar" style="background-color:rgb(240, 248, 255)">
+
+  <div class="row">
+    <div class="col-sm-3 col-lg-6">
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/home" routerLinkActive="active">Home </a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-sm-3 col-lg-6" *ngIf="resutls">
+      &#x2705;
+      <!-- <input type="text" name="" id="" [value]="data"> -->
+    </div>
+  </div>
+
+  <div class="row">
+      <div class="col-sm-3 col-lg-6">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+              <a class="nav-link" routerLink="/school">School</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-sm-3 col-lg-6">
+        &#x2705;
+      </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-3 col-lg-6">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/work">Work</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-3 col-lg-6">
+          &#x2705;
+        </div>
+      </div>
+   
+    <!-- <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link active" routerLink="/home" routerLinkActive="active">Home </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/school">School</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/work">Work</a>
+      </li>
+    </ul> -->
+
+
+   
+</div>
+
+<!-- <div class="col-sm-3 col-lg-2" id="navBar" style="background-color:rgb(240, 248, 255)">
+ <div> &#x2705; </div>
+ <div> &#x2705; </div>
+</div> -->
+
+  <div class="col-sm-9 col-lg-7" id="reccontent">
+      <div class="panel-heading">
+              <br><br>
+              <router-outlet></router-outlet>
+      </div>
+  </div>
+
+  
+  
+  
+
+
+
