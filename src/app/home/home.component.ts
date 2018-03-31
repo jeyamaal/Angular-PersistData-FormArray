@@ -15,9 +15,6 @@ export class HomeComponent implements OnInit {
 
   results:boolean=false;
 
-//session2 = sessionStorage.getItem('autosave');
-
- //getSession=this.session2;
 
   constructor(private schoolFB: FormBuilder, private router:Router,private data:DataserviceService) { 
 
@@ -27,32 +24,15 @@ export class HomeComponent implements OnInit {
 
     });
   
-//     if(this.homeForm.controls['homeName'].value==''){
 
-//       if(this.session2 != null){
 
-//              console.log("Session2 is not null");
-//              this.homeForm=this.schoolFB.group({
-
-             
-
-//               'homeName':[this.getSession.valueOf(),Validators.required]
-       
-//            });
-
-//       }
-
-//       console.log('Null in formcontrolName');
-// }
-
-let formValues = sessionStorage.getItem('autosave');
+// If form values are stored in  Session object Retirve those  
+ let formValues = sessionStorage.getItem('autosave');
     if (formValues) {
       this.applyFormValues(this.homeForm, JSON.parse(formValues));
     }
 
-
-
-
+    // Validate the form and Save the form values in Sesion Storeage
     this.onChanges(); 
   }
 
@@ -64,14 +44,11 @@ let formValues = sessionStorage.getItem('autosave');
     }
   
     onHomeFormSubmit(){
-  
       console.log(this.homeForm);
     }
   
-     
     homeFunction(){
-
-      console.log("Home Function is Working");
+        console.log("Home Function is Working");
     }
 
     functionHome(){
@@ -83,26 +60,28 @@ let formValues = sessionStorage.getItem('autosave');
 
   onChanges(): void { 
     this.homeForm.valueChanges.subscribe(val => {
-    if (this.homeForm.valid) {
-      sessionStorage.setItem("autosave",JSON.stringify(this.homeForm.value));
-      this.results=true;
-      this.data.homeformValid(this.results);
-      //alert("Home Form is valid");
-      //sessionStorage.setItem('homeFormValid', 'valid1');
-      console.log("Home Value Passed"+"   "+this.results);
-    } 
-    
- 
-    
-    else {
-      
-      this.results=false;
-      alert("Home Form is invalid");
-     // sessionStorage.setItem('homeFormValid', 'valid2');
-      sessionStorage.clear();
-    }
+      if (this.homeForm.valid) {
+        sessionStorage.setItem("autosave", JSON.stringify(this.homeForm.value));
+        this.results = true;
+        this.data.homeformValid(this.results);
+        //alert("Home Form is valid");
+        //sessionStorage.setItem('homeFormValid', 'valid1');
+        console.log("Home Value Passed" + "   " + this.results);
+      }
+
+
+
+      else {
+
+        this.results = false;
+        alert("Home Form is invalid");
+        // sessionStorage.setItem('homeFormValid', 'valid2');
+        sessionStorage.clear();
+      }
     });
   }
+
+  // Retaining the Form Values in Form
 
   private applyFormValues (group, formValues) {
     
