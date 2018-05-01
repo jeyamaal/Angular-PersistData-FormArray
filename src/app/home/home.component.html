@@ -6,6 +6,32 @@
   <input type="text" class="form-control" placeholder="Home" formControlName="homeName">
 
   <br>
+
+   
+      <!--Advanced Level Exam-->
+      <h4>
+        Advance Level Examination
+      </h4>
+      <div class="form-group">
+
+           <div formArrayName="advResults">
+            <div *ngFor="let advResults of homeForm.controls.advResults['controls']; let i=index" class="panel panel-default">
+              <div class="panel-heading">
+                <span> <b>Subject</b> {{i + 1}}</span>
+                <span class="pull-right glyphicon glyphicon-remove" *ngIf="homeForm.controls.advResults.controls.length > 1" (click)="removeAdvResults(i)"></span>
+              </div>
+              <div class="panel-body" [formGroupName]="i">
+                <exam [group]="homeForm.controls.advResults.controls[i]"> </exam>
+              </div>
+            </div>
+          </div>
+          <div class="margin-20">
+            <input type="button" class="btn btn-primary" (click)="addAdvResults()"  value="+Add More Subjects"/>
+          </div>
+      
+      </div>
+
+      <br>
   <button type="submit" class="btn btn-success" [disabled]=homeForm.invalid (click)="btnNextHomeClick();">Save and Continue</button>
 
   <div *ngIf= "!homeForm.invalid">

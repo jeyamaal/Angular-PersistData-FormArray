@@ -8,6 +8,7 @@ import { routing } from './app.routing';
 import { WorkComponent } from './work/work.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DataserviceService } from './dataservice.service';
+import { ExamComponent } from './exam/exam.component';
 
 
 
@@ -17,6 +18,7 @@ import { DataserviceService } from './dataservice.service';
     HomeComponent,
     SchoolComponent,
     WorkComponent,
+    ExamComponent,
   
   ],
   imports: [

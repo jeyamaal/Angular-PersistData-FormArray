@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormArray, FormBuilder, Validators,ReactiveFormsModule  } from '@angular/forms';
+import { FormGroup, FormArray, FormBuilder, Validators,ReactiveFormsModule,FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataserviceService } from '../dataservice.service';
 
@@ -20,17 +20,13 @@ export class HomeComponent implements OnInit {
 
     this.homeForm=this.schoolFB.group({
 
-       'homeName':['',Validators.required]
+       'homeName':['',Validators.required],
+        advResults:this.schoolFB.array([])
 
     });
   
-
-
-// If form values are stored in  Session object Retirve those  
- let formValues = sessionStorage.getItem('autosave');
-    if (formValues) {
-      this.applyFormValues(this.homeForm, JSON.parse(formValues));
-    }
+    // Initialte the advResults Form Array
+    this.addAdvResults();
 
     // Validate the form and Save the form values in Sesion Storeage
     this.onChanges(); 
@@ -47,49 +43,73 @@ export class HomeComponent implements OnInit {
       console.log(this.homeForm);
     }
   
-    homeFunction(){
-        console.log("Home Function is Working");
-    }
-
-    functionHome(){
-
-      alert("Hello Its Home");
-    }
+    
   
-    ngOnInit() { }
+    ngOnInit() { 
+      
+        // If form values are stored in  Session object Retirve those  
+        let formValues = sessionStorage.getItem('homeDetail');
+        if (formValues) {
+          this.applyFormValues(this.homeForm, JSON.parse(formValues));
+        }
+
+    
+    }
+
+
+    // Advanced Level Component
+    initAdvResults() {
+      return this.schoolFB.group({
+        advSubjectName: [],
+        advResult: [''],
+        advDate:['']
+         });
+  }
+      
+      addAdvResults() {
+        const control = <FormArray>this.homeForm.controls['advResults'];
+        const addrCtrl = this. initAdvResults();
+        control.push(addrCtrl);
+    }
+
+    removeAdvResults(i: number) {
+        const control = <FormArray>this.homeForm.controls['advResults'];
+        control.removeAt(i);
+    }
+
+
 
   onChanges(): void { 
     this.homeForm.valueChanges.subscribe(val => {
       if (this.homeForm.valid) {
-        sessionStorage.setItem("autosave", JSON.stringify(this.homeForm.value));
+        sessionStorage.setItem("homeDetail", JSON.stringify(this.homeForm.value));
         this.results = true;
         this.data.homeformValid(this.results);
-        //alert("Home Form is valid");
-        //sessionStorage.setItem('homeFormValid', 'valid1');
         console.log("Home Value Passed" + "   " + this.results);
       }
 
-
-
-      else {
-
+      else{
         this.results = false;
-        alert("Home Form is invalid");
-        // sessionStorage.setItem('homeFormValid', 'valid2');
+       // alert("Home Form is invalid");
         sessionStorage.clear();
       }
     });
   }
 
+ 
   // Retaining the Form Values in Form
-
-  private applyFormValues (group, formValues) {
+   private applyFormValues (group, formValues) {
     
     Object.keys(formValues).forEach(key => {
       let formControl = group.controls[key];
+    
       if (formControl instanceof FormGroup) {
         this.applyFormValues(formControl, formValues[key]);
-      } else {
+      } 
+      // if(formControl instanceof FormArray){
+      //   this.applyFormValues(formControl, formValues[key]);  
+      // }
+      else {
         formControl.setValue(formValues[key]);
       }
     });
